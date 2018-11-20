@@ -8,7 +8,7 @@ verify_token = os.getenv("VERIFY_TOKEN")
 access_token = os.getenv("ACCESS_TOKEN")
 
 
-@app.route("/")
+@app.route("/",methods=['GET','POST'])
 def default():
     return "default"
 
@@ -20,4 +20,24 @@ def verify():
 
 @app.route("/webhook",methods=['POST'])
 def webhook():
-    return "hello"
+    data = json.loads(request.data)
+    entries = data["entry"]
+    if data["object"] == "page":
+        for entry in entries:
+            user_message = entry['messaging'][0]['message']['text']
+            user_id = entry['messaging'][0]['sender']['id']
+            response = createRes(user_message,user_id)
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, json=response)
+    return Response(response="EVENT RECEIVED",status=200)
+
+
+def createRes(message,userid):
+    response = {
+        'recipient': {'id': userid},
+        'message': {'text': message}
+    }
+    return response
+
+
+if __name__=='__main__':
+    app.run(debug=True,use_reloader=True)
