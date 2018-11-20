@@ -21,6 +21,7 @@ def verify():
 @app.route("/webhook",methods=['POST'])
 def webhook():
     data = json.loads(request.data)
+    return request.data
     entries = data["entry"]
     if data["object"] == "page":
         for entry in entries:
@@ -29,7 +30,7 @@ def webhook():
             response = createRes(user_message,user_id)
             
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, data=response)
-    return json.dumps(response)
+    return "ok"
 
 
 def createRes(message,userid):
