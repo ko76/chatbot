@@ -57,7 +57,7 @@ def createRes(message,userid):
 def getLoc(message):
     split_string = message.split(" ")
     if len(split_string) < 4:
-        return "cannot" + message
+        return "cannot " + message
     if message == "list all dining halls":
         return "all"
     elif split_string[3] == "today":
@@ -67,7 +67,7 @@ def getLoc(message):
             if loc == strn:
                 return strn
         return "no such dining hall"
-    return "cannot" + message
+    return "cannot " + message
 
 if __name__=='__main__':
     app.run(debug=True,use_reloader=True)
