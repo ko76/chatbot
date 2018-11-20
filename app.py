@@ -20,4 +20,4 @@ def verify():
 
 @app.route("/webhook",methods=['POST'])
 def webhook():
-    return "hi"
+    return "hello"
