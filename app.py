@@ -14,15 +14,17 @@ def default():
 
 @app.route("/webhook",methods=['GET'])
 def verify():
-    return request.data
+    if request.data == "":
+        return "hi"
     if request.args.get('hub.verify_token') == verify_token:
         return request.args.get('hub.challenge')
     return "Wrong verify token"
 
 @app.route("/webhook",methods=['POST'])
 def webhook():
+    if request.data =="":
+        return 'bye'
     data = json.loads(request.data)
-    return request.data
     entries = data["entry"]
     if data["object"] == "page":
         for entry in entries:
