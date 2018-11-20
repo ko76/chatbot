@@ -14,7 +14,7 @@ def default():
 
 @app.route("/webhook",methods=['GET'])
 def verify():
-    return request.args.get('hub.verify_token') + "  " + access_token
+    return request.args.get('hub.verify_token')
     if request.args.get('hub.verify_token') == verify_token:
         return request.args.get('hub.challenge')
     return "Wrong verify token"
