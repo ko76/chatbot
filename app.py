@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 verify_token = os.getenv("VERIFY_TOKEN")
 access_token = os.getenv("ACCESS_TOKEN")
-
+print(verify_token)
 
 @app.route("/",methods=['GET','POST'])
 def default():
@@ -14,7 +14,7 @@ def default():
 
 @app.route("/webhook",methods=['GET'])
 def verify():
-    if request.args.get('hub.verify_token') == 'chatchat':
+    if request.args.get('hub.verify_token') == verify_token:
         return request.args.get('hub.challenge')
     return "Wrong verify token"
 
