@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, Response
 import requests
-from pymessenger.bot import Bot
 import json
 import os
 app = Flask(__name__)
@@ -25,6 +24,7 @@ def webhook():
     entries = data["entry"]
     if data["object"] == "page":
         for entry in entries:
+
             user_message = entry['messaging'][0]['message']['text']
             user_id = entry['messaging'][0]['sender']['id']
             print(user_id)
