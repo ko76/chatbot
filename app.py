@@ -26,6 +26,7 @@ def webhook():
         for entry in entries:
             user_message = entry['messaging'][0]['message']['text']
             user_id = entry['messaging'][0]['sender']['id']
+            print(user_id)
             response = createRes(user_message,user_id)
             
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, data=response)
@@ -34,8 +35,9 @@ def webhook():
 
 def createRes(message,userid):
     response = {
+        'messaging_type': 'RESPONSE',
         'recipient': {'id': userid},
-        'message': {'text': message}
+        'message': {'text': "Hello world"}
     }
     return response
 
