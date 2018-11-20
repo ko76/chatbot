@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 verify_token = os.getenv("VERIFY_TOKEN")
 access_token = os.getenv("ACCESS_TOKEN")
-print(verify_token)
+#print(verify_token)
 
 @app.route("/",methods=['GET','POST'])
 def default():
@@ -28,8 +28,9 @@ def webhook():
             user_id = entry['messaging'][0]['sender']['id']
             print(user_id)
             response = createRes(user_message,user_id)
-            
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, data=response)
+            print('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token) 
+            headers = {'Content-type': 'application/json'}
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, data=json.dumps(response),headers = headers)
     return "ok"
 
 
