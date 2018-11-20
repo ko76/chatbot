@@ -10,7 +10,7 @@ access_token = os.getenv("ACCESS_TOKEN")
 
 @app.route("/",methods=['GET','POST'])
 def default():
-    return "default"
+    return "def"
 
 @app.route("/webhook",methods=['GET'])
 def verify():
