@@ -40,7 +40,7 @@ def createRes(message,userid):
     response = {
         'messaging_type': 'RESPONSE',
         'recipient': {'id': userid},
-        'message': {'text': "Hello world"}
+        'message': {'text': message}
     }
     return response
 
