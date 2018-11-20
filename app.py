@@ -20,7 +20,7 @@ def verify():
     return "Wrong verify token"
 
 @app.route("/webhook",methods=['POST'])
-"""def webhook():
+def webhook():
     data = json.loads(request.data)
     entries = data["entry"]
     if data["object"] == "page":
@@ -33,23 +33,7 @@ def verify():
             headers = {'Content-type': 'application/json'}
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + access_token, data=json.dumps(response),headers = headers)
     return "ok"
-    """
-def webhook():
-    output = request.get_json()
-       for event in output['entry']:
-          messaging = event['messaging']
-          for message in messaging:
-            if message.get('message'):
-                #Facebook Messenger ID for user so we know where to send response back to
-                recipient_id = message['sender']['id']
-                if message['message'].get('text'):
-                    response_sent_text = get_message()
-                    send_message(recipient_id, response_sent_text)
-                #if user sends us a GIF, photo,video, or any other non-text item
-                if message['message'].get('attachments'):
-                    response_sent_nontext = get_message()
-                    send_message(recipient_id, response_sent_nontext)
-    return "message done"
+
 
 
 def createRes(message,userid):
