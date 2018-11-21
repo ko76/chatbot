@@ -30,7 +30,7 @@ def webhook():
             if(m==None):
                 return "no message found"
             userm = m[0].get('message')
-            if(userm=='None'):
+            if(userm==None):
                 return "no message found"
             useri = m[0].get('sender')
             if(useri==None):
