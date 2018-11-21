@@ -27,18 +27,18 @@ def webhook():
         returnmessage = ""
         for entry in entries:
             m= entry.get('messaging')
-            if(m=='None'):
+            if(m==None):
                 return "no message found"
             userm = m[0].get('message')
             if(userm=='None'):
                 return "no message found"
             useri = m[0].get('sender')
-            if(useri=='None'):
+            if(useri==None):
                 return "no sender"
             
             user_message = userm.get('text')
             user_id = useri.get('id')
-            if(user_id=='None'):
+            if(user_id==None):
                 return "no sender"
             loc = getLoc(user_message)
             if loc == "all":
