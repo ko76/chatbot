@@ -50,7 +50,7 @@ def createRes(message,userid):
     response = {
         'messaging_type': 'RESPONSE',
         'recipient': {'id': userid},
-        'message': {'text': message}
+        'message': {'text': "hanzen sucks"}
     }
     return response
 
@@ -58,7 +58,7 @@ def getLoc(message):
     split_string = message.split(" ")
     if len(split_string) < 4:
         return "cannot " + message
-    if message == "list all dining halls":
+    if message.lower() == "list all dining halls".lower():
         return "all"
     elif split_string[3] == "today":
         strn = split_string[1]
