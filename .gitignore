@@ -2,3 +2,4 @@ tokens.sh
 *.pyc
 test.py
 __pycache__
+.vscode
