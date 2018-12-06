@@ -108,7 +108,7 @@ def purdueDining(text):
     message = ""
     if text == "all":
         for loc in locations:
-            message += loc
+            message += loc + "\n"
     else:
         header = {"Accept": "application/json"}
         res = requests.get(URL + text + "/" + time, headers=header).json()
