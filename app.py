@@ -86,6 +86,8 @@ def createRes(message, userid):
 
 
 def purdueInfo(message):
+    if message == None:
+        return "could not understand"
     split_string = message.split(" ")
     mess = ""
     if len(split_string) < 4:
