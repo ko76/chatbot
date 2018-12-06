@@ -61,7 +61,7 @@ def webhook():
                 return "no sender"
             returnmessage = purdueInfo(user_message)
             
-            splitstr = returnmessage.split("\n")
+            splitstr = returnmessage.split("~")
             for x in splitstr:
                 print(x)
                 response = createRes(x, user_id)
@@ -137,7 +137,7 @@ def purdueDining(text):
                     message += mealjson[x]["Stations"][y]["Items"][z]["Name"] +"\n"
                 #print(" ")
                 message += "\n"
-
+            message+= "~"
     return message
 
 
