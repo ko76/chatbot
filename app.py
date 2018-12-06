@@ -60,15 +60,18 @@ def webhook():
             if user_id == None:
                 return "no sender"
             returnmessage = purdueInfo(user_message)
-            print(returnmessage)
-            response = createRes(returnmessage, user_id)
-            headers = {"Content-type": "application/json"}
-            requests.post(
-                "https://graph.facebook.com/v2.6/me/messages/?access_token="
-                + access_token,
-                data=json.dumps(response),
-                headers=headers,
-            )
+            
+            splitstr = returnmessage.split("\n")
+            for x in splitstr:
+                print(x)
+                response = createRes(x, user_id)
+                headers = {"Content-type": "application/json"}
+                requests.post(
+                    "https://graph.facebook.com/v2.6/me/messages/?access_token="
+                    + access_token,
+                    data=json.dumps(response),
+                    headers=headers,
+                )
     return "ok"
 
 
@@ -115,7 +118,25 @@ def purdueDining(text):
         
         
         message = res["Location"] +"\n"
-        
+        mealjson = res["Meals"]
+        for x in list(range(len(mealjson))):
+           # print(mealjson[x]["Name"])
+            message += "-----"+mealjson[x]["Name"] +"-----\n"
+            for y in list(range(len(mealjson[x]["Stations"]))):
+                #print("-------")
+                #print(
+                #    "-----"
+                #    + mealjson[x]["Stations"][y]["Name"]
+                #)
+                message += "---"+ mealjson[x]["Stations"][y]["Name"]+"---\n"
+                for z in list(range(len(mealjson[x]["Stations"][y]["Items"]))):
+                    #print(
+                    #    "----"
+                    #    + mealjson[x]["Stations"][y]["Items"][z]["Name"]
+                    #)
+                    message += mealjson[x]["Stations"][y]["Items"][z]["Name"] +"\n"
+                #print(" ")
+                message += "\n"
 
     return message
 
