@@ -60,7 +60,7 @@ def webhook():
             if user_id == None:
                 return "no sender"
             returnmessage = purdueInfo(user_message)
-
+            print(returnmessage)
             response = createRes(returnmessage, user_id)
             headers = {"Content-type": "application/json"}
             requests.post(
@@ -112,26 +112,28 @@ def purdueDining(text):
     else:
         header = {"Accept": "application/json"}
         res = requests.get(URL + text + "/" + time, headers=header).json()
-        message = text
+        
         print(res["Location"])
+        message = res["Location"] +"\n"
         mealjson = res["Meals"]
         for x in list(range(len(mealjson))):
-            print(mealjson[x]["Name"].encode("ascii", "ignore"))
+           # print(mealjson[x]["Name"])
+            message += "-----"+mealjson[x]["Name"] +"-----\n"
             for y in list(range(len(mealjson[x]["Stations"]))):
-                print("-------")
-                print(
-                    "----"
-                    + mealjson[x]["Stations"][y]["Name"].encode("ascii", "ignore")
-                    + "| font=HelveticaNeue-Bold"
-                )
+                #print("-------")
+                #print(
+                #    "-----"
+                #    + mealjson[x]["Stations"][y]["Name"]
+                #)
+                message += "---"+ mealjson[x]["Stations"][y]["Name"]+"---\n"
                 for z in list(range(len(mealjson[x]["Stations"][y]["Items"]))):
-                    print(
-                        "----"
-                        + mealjson[x]["Stations"][y]["Items"][z]["Name"].encode(
-                            "ascii", "ignore"
-                        )
-                    )
-                print(" ")
+                    #print(
+                    #    "----"
+                    #    + mealjson[x]["Stations"][y]["Items"][z]["Name"]
+                    #)
+                    message += mealjson[x]["Stations"][y]["Items"][z]["Name"] +"\n"
+                #print(" ")
+                message += "\n"
 
     return message
 
