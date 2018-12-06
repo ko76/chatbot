@@ -113,27 +113,9 @@ def purdueDining(text):
         header = {"Accept": "application/json"}
         res = requests.get(URL + text + "/" + time, headers=header).json()
         
-        print(res["Location"])
+        
         message = res["Location"] +"\n"
-        mealjson = res["Meals"]
-        for x in list(range(len(mealjson))):
-           # print(mealjson[x]["Name"])
-            message += "-----"+mealjson[x]["Name"] +"-----\n"
-            for y in list(range(len(mealjson[x]["Stations"]))):
-                #print("-------")
-                #print(
-                #    "-----"
-                #    + mealjson[x]["Stations"][y]["Name"]
-                #)
-                message += "---"+ mealjson[x]["Stations"][y]["Name"]+"---\n"
-                for z in list(range(len(mealjson[x]["Stations"][y]["Items"]))):
-                    #print(
-                    #    "----"
-                    #    + mealjson[x]["Stations"][y]["Items"][z]["Name"]
-                    #)
-                    message += mealjson[x]["Stations"][y]["Items"][z]["Name"] +"\n"
-                #print(" ")
-                message += "\n"
+        
 
     return message
 
